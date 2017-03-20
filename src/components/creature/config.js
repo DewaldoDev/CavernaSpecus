@@ -1,6 +1,4 @@
-import { getRandomElementWithSeed, getRandomIndexWithSeed } from "../lib/seed";
-
-const CREATURE_COLOURS = [
+export const CREATURE_COLOURS = [
   "alice blue", "antique white", "aquamarine", "azure", "beige", "bisque", "black",
   "blanched almond", "blue", "blue violet", "brown", "cadet blue", "chartreuse",
   "chocolate", "coral", "cornflower blue", "crimson", "cyan", "dark blue", "dark cyan",
@@ -19,7 +17,7 @@ const CREATURE_COLOURS = [
   "tan", "teal", "turquoise", "violet", "white","yellow", "yellow green",
 ];
 
-const CREATURE_PATTERNS = [
+export const CREATURE_PATTERNS = [
   "armed", "backed", "banded", "bellied", "blotched", "bodied", "breasted", "dashed", "checkered",
   "cheeked", "dabbed", "dotted", "eared", "feathered", "footed", "freckled", "furred", "headed",
   "hooded", "horned", "lined", "marked", "masked", "mottled", "naped", "necked", "patched", "pocked",
@@ -28,7 +26,7 @@ const CREATURE_PATTERNS = [
   "trimmed",
 ];
 
-const SPECIES_BY_FAMILY = {
+export const SPECIES_BY_FAMILY = {
   amphibian: {
     glyph: "a",
     species: ["frog", "newt", "salamander", "turtle"],
@@ -106,33 +104,3 @@ const SPECIES_BY_FAMILY = {
     species: ["anteater", "armadillo", "sloth"],
   },
 };
-
-class Creature {
-  constructor (args) {
-    this.family = getRandomIndexWithSeed(SPECIES_BY_FAMILY);
-    this.color = getRandomElementWithSeed(CREATURE_COLOURS);
-    this.pattern = getRandomElementWithSeed(CREATURE_PATTERNS);
-  }
-
-  get species () {
-    this._species =
-      this._species ||
-      getRandomElementWithSeed(SPECIES_BY_FAMILY[this.family].species);
-
-    return this._species;
-  }
-
-  get name () {
-    return `${this.color} ${this.pattern} ${this.species}`;
-  }
-
-  get glyph () {
-    return SPECIES_BY_FAMILY[this.family].glyph;
-  }
-
-  get cssColor () {
-    return this.color.replace(" ", "");
-  }
-}
-
-export default Creature;

@@ -2,7 +2,6 @@ import find from "lodash/find";
 import findIndex from "lodash/findIndex";
 import last from "lodash/last";
 import { CAVE_HEIGHT, CAVE_WIDTH } from "../config";
-import Tile from "../classes/Tile";
 
 const WALL_TO_SPACE_RATIO = 0.6;
 const WALL_SMOTHING_ITERATIONS = 5;
@@ -133,6 +132,6 @@ export const calculateCaveSections = (cave, startPos) => {
 
 export const convertGlyphsToTileObjects = cave => (
   cave.map(row => row.map(tile =>(
-    tile === "#" ? new Tile({name: "WALL"}) : new Tile({name: "EMPTY"})
+    tile === "#" ? {name: "WALL"} : {name: "EMPTY"}
   )))
 );

@@ -1,6 +1,5 @@
 import { createActionCreators, createReducer } from "../../utils/reduxHelpers";
 import { createCaveWalls } from "../../lib/buildCADungeon";
-import Tile from "../../classes/Tile";
 
 export const actions = createActionCreators({
   namespace: "cave",
@@ -17,11 +16,11 @@ const initialState = {
 const cave = createReducer({
   [actions.drawToMap]: (state, { pos, tile }) => ({
     ...state,
-    caveMap: Object.assign([], state.caveMap, {[pos[0]]: {[pos[1]]: new Tile(tile)}})
+    caveMap: Object.assign([], state.caveMap, {[pos[0]]: {[pos[1]]: tile}})
   }),
   [actions.removeFromMap]: (state, { pos }) => ({
     ...state,
-    caveMap: Object.assign([], state.caveMap, {[pos[0]]: {[pos[1]]: new Tile({name: "EMPTY"})}})
+    caveMap: Object.assign([], state.caveMap, {[pos[0]]: {[pos[1]]: {name: "EMPTY"}}})
   }),
 }, initialState);
 
