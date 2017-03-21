@@ -2,6 +2,7 @@ import find from "lodash/find";
 import findIndex from "lodash/findIndex";
 import last from "lodash/last";
 import { CAVE_HEIGHT, CAVE_WIDTH } from "../config";
+import { getRandomNumberWithSeed } from "./seed";
 
 const WALL_TO_SPACE_RATIO = 0.6;
 const WALL_SMOTHING_ITERATIONS = 5;
@@ -10,7 +11,7 @@ export const createCaveWalls = () => {
   const cave = Array(CAVE_HEIGHT).fill().map(() => Array(CAVE_WIDTH).fill("."));
   const seededCave = cave.map(row => (
     row.map(glyph => (
-      Math.random() > WALL_TO_SPACE_RATIO ? "#" : "."
+      getRandomNumberWithSeed() > WALL_TO_SPACE_RATIO ? "#" : "."
     ))
   ));
   const smoothedCave = smoothCaveWalls(seededCave, WALL_SMOTHING_ITERATIONS);

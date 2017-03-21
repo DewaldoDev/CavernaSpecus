@@ -8,6 +8,13 @@ seed = process.env.NODE_ENV === "test" ? "TEST" : seed;
 
 let SEED = seedrandom(seed)();
 
+export const getRandomNumberWithSeed = () => {
+  const randomNumber = SEED;
+  SEED = seedrandom(SEED)();
+
+  return randomNumber;
+};
+
 export const getRandomIndexWithSeed = (parent) => {
   let indexFromSeed;
   
