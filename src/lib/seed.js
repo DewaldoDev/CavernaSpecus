@@ -1,27 +1,24 @@
 import seedrandom from "seedrandom";
+import url from "url";
 import isArray from "lodash/isArray";
 import isObject from "lodash/isObject";
 
-let TEST_SEED = seedrandom("TEST")();
+let { seed } = url.parse(window.location.href, true).query;
+seed = process.env.NODE_ENV === "test" ? "TEST" : seed;
 
-let SEED = seedrandom()();
+let SEED = seedrandom(seed)();
 
 export const getRandomIndexWithSeed = (parent) => {
-  const seed = process.env.NODE_ENV === "test" ? TEST_SEED : SEED;
   let indexFromSeed;
   
   if (isArray(parent)) {
-    indexFromSeed = Math.floor(seed * (parent.length));
+    indexFromSeed = Math.floor(SEED * (parent.length));
   } else if (isObject(parent)) {
     const keys = Object.keys(parent);
-    indexFromSeed = keys[Math.floor(seed * (keys.length))];
+    indexFromSeed = keys[Math.floor(SEED * (keys.length))];
   }
 
-  if (process.env.NODE_ENV === "test") {
-    TEST_SEED = seedrandom(TEST_SEED)();
-  } else {
-    SEED = seedrandom(SEED)();
-  }
+  SEED = seedrandom(SEED)();
 
   return indexFromSeed;
 };
