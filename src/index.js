@@ -3,7 +3,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./rootReducer";
 import ReactDOM from "react-dom";
-import CaveContainer from "./components/cave/CaveContainer";
+import Cave from "./components/cave/Cave";
 import './index.css';
 
 const store = createStore(rootReducer);
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <CaveContainer />
+        <Cave />
       </Provider>
     );
   }
