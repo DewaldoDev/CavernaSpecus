@@ -27,7 +27,7 @@ class Tile extends Component {
     const { glyph } = this.state;
 
     return (
-      <StyledTile title={name}>
+      <StyledTile>
         {glyph}
       </StyledTile>
     );

@@ -1,5 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 
-const Player = () => ();
+const StyledGlyph = styled.span`
+  margin: 10px;
+`;
+
+const Player = () => (
+  <StyledGlyph>
+    @
+  </StyledGlyph>
+);
 
 export default Player;

@@ -17,25 +17,4 @@ describe("Cave Reducer", () => {
     expect(selectors.getTileAtPosition(initial, { pos: [0, 0] })).toEqual(tile);
   });
 
-  it("Draws a character to the map", () => {
-    const initial = cave(undefined, {});
-    const action = {
-      type: "cave/DRAW_TO_MAP",
-      payload: { tile: {name: "PLAYER"}, pos: [0, 0] }
-    };
-    const after = cave(initial, action);
-
-    expect(selectors.getCaveMap(after)[0][0].name).toEqual("PLAYER");
-  });
-
-  it("Removes a character from the map", () => {
-    const initial = { caveMap: [[{name: "PLAYER"}]] };
-    const action = {
-      type: "cave/REMOVE_FROM_MAP",
-      payload: { pos: [0, 0] }
-    };
-    const after = cave(initial, action);
-
-    expect(selectors.getCaveMap(after)[0][0].name).toEqual("EMPTY");
-  });
 });

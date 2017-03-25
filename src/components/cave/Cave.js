@@ -1,48 +1,47 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { selectors } from "../../rootReducer";
-import { actions as caveActions } from "./caveReducer";
 import Tile from "../tile/Tile";
+import Player from "../player/Player";
 import Creature from "../creature/Creature";
 
-const Cave = ({ caveMap }) => (
-  <div>
-    {caveMap.map((row, yPos) => (
-      <div key={yPos}>
-        {row.map((tile, xPos) => (
-          <Tile
-            key={`${yPos},${xPos}`}
-            name={tile.name}
-          />
-        ))}
-      </div>
-    ))}
-    <div>
-      <Creature />
-    </div>
-  </div>
-);
-
-Cave.propTypes = {
-  caveMap: PropTypes.array.isRequired
-};
-
-const buildCaveMap = (state, caveMap, glyphs) => {
-  Object.keys(glyphs).forEach(pos => {
-    caveActions.drawToMap([pos], glyphs[pos])
-  });
-
-  return({ caveMap: selectors.getCaveMap(state) });
-};
-
-const mapStateToProps = state => {
-  const caveMap = selectors.getCaveMap(state);
-  const playerPosition = selectors.getPlayerPosition(state);
-  const glyphs = {
-    [playerPosition]: { name: "PLAYER" }
+class Cave extends Component {
+  static propTypes = {
+    caveMap: PropTypes.array.isRequired,
+    playerPosition: PropTypes.array.isRequired,
   };
 
-  return buildCaveMap(state, caveMap, glyphs);
+  render () {
+    const { caveMap, playerPosition } = this.props;
+
+    return (
+      <div>
+        {caveMap.map((row, yPos) => (
+          <div key={yPos}>
+            {row.map((tile, xPos) => (
+              xPos === playerPosition[0] && yPos === playerPosition[1] ? (
+                <Player />
+              ) : (
+                <Tile
+                  key={`${yPos},${xPos}`}
+                  name={tile.name}
+                />
+              )
+            ))}
+          </div>
+        ))}
+        <div>
+          <Creature />
+        </div>
+      </div>
+    );
+  }
 };
+
+
+const mapStateToProps = state => ({
+  caveMap: selectors.getCaveMap(state),
+  playerPosition: selectors.getPlayerPosition(state),
+});
 
 export default connect(mapStateToProps)(Cave);
