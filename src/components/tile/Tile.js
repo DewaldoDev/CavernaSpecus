@@ -11,20 +11,8 @@ class Tile extends Component {
     name: PropTypes.string.isRequired,
   };
 
-  constructor (props) {
-    super(props);
-    
-    const { glyph, passable } = TILE_NAME_TO_PROPERTIES[props.name];
-
-    this.state = {
-      glyph,
-      passable,
-    };
-  }
-
   render () {
-    const { name } = this.props;
-    const { glyph } = this.state;
+    const { glyph } = TILE_NAME_TO_PROPERTIES[this.props.name];
 
     return (
       <StyledTile>
