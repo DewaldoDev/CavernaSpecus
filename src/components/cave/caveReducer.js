@@ -1,5 +1,5 @@
 import { createActionCreators, createReducer } from "../../utils/reduxHelpers";
-import { createCaveWalls } from "../../lib/buildCADungeon";
+import { createCaveWalls } from "../../lib/constructors/buildCADungeon";
 
 export const actions = createActionCreators({
   namespace: "cave",

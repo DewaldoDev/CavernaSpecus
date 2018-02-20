@@ -1,8 +1,8 @@
 import find from "lodash/find";
 import findIndex from "lodash/findIndex";
 import last from "lodash/last";
-import { CAVE_HEIGHT, CAVE_WIDTH } from "../config";
-import { getRandomNumberWithSeed } from "./seed";
+import { CAVE_HEIGHT, CAVE_WIDTH } from "../../config";
+import { getRandomNumberWithSeed } from "../seed";
 
 const WALL_TO_SPACE_RATIO = 0.6;
 const WALL_SMOTHING_ITERATIONS = 5;
@@ -35,7 +35,7 @@ export const smoothCaveWalls = (cave, times) => {
       return "#";
     }
     return tile;
-    
+
   }));
 
   //Edge cells are always walls
@@ -45,7 +45,7 @@ export const smoothCaveWalls = (cave, times) => {
         return "#";
       }
       return tile;
-      
+
     }));
   }
   return smoothCaveWalls(smoothedCave, times-1);
