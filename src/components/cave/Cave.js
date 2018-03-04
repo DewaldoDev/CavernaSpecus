@@ -3,12 +3,13 @@ import styled from "styled-components";
 import flow from "lodash/flow";
 import { connect } from "react-redux";
 import { selectors } from "../../rootReducer";
+import { BACKGROUND_COLOUR } from "../../config";
 import withKeyBindings from "../../lib/hocs/withKeyBindings";
 import Tile from "../tile/Tile";
 import Player from "../player/Player";
 
 const Container = styled.div`
-  overflow: hidden;
+  background-color: ${BACKGROUND_COLOUR};
 `;
 
 const SUBSET_SIZE = 30;

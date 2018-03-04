@@ -4,6 +4,8 @@ import { TILE_NAME_TO_PROPERTIES } from "./config";
 
 const StyledTile = styled.span`
   margin: 10px;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ color }) => color};
 `;
 
 class Tile extends Component {
@@ -12,10 +14,17 @@ class Tile extends Component {
   };
 
   render () {
-    const { glyph } = TILE_NAME_TO_PROPERTIES[this.props.name];
+    const {
+      glyph,
+      backgroundColor,
+      color,
+    } = TILE_NAME_TO_PROPERTIES[this.props.name];
 
     return (
-      <StyledTile>
+      <StyledTile
+        backgroundColor={backgroundColor}
+        color={color}
+      >
         {glyph}
       </StyledTile>
     );
