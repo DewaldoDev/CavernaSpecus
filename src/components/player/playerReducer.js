@@ -1,4 +1,5 @@
 import { createActionCreators, createReducer } from "../../utils/reduxHelpers";
+import { PLAYER_STARTING_POS, CAVE_HEIGHT, CAVE_WIDTH } from "../../config";
 
 export const actions = createActionCreators({
   namespace: "player",
@@ -8,14 +9,18 @@ export const actions = createActionCreators({
 });
 
 const initialState = {
-  playerPosition: [1, 1]
+  playerPosition: PLAYER_STARTING_POS
 };
 
+const isValidPosition = ([x, y]) =>
+  x > 0 && y > 0 && x < CAVE_WIDTH && y < CAVE_HEIGHT;
+
 const player = createReducer({
-  [actions.updatePlayerPosition]: (state, { pos }) => ({
-    ...state,
-    playerPosition: pos
-  })
+  [actions.updatePlayerPosition]: (state, { pos }) =>
+    isValidPosition(pos) ? {
+      ...state,
+      playerPosition: pos
+    } : state
 }, initialState);
 
 export default player;

@@ -17,4 +17,15 @@ describe("Player Reducer", () => {
 
     expect(selectors.getPlayerPosition(after)).toEqual([1, 2]);
   });
+
+  it("does not update if position is invalid", () => {
+    const initial = player(undefined, {});
+    const action = {
+      type: "player/UPDATE_PLAYER_POSITION",
+      payload: { pos: [1, 0] }
+    };
+    const after = player(initial, action);
+
+    expect(selectors.getPlayerPosition(after)).toEqual([1, 1]);
+  });
 });

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { selectors } from "../../rootReducer";
 import { actions as playerActions } from "../../components/player/playerReducer";
+import { TILE_NAME_TO_PROPERTIES } from "../../components/tile/config";
 
 const mapStateToProps = state => ({
   caveMap: selectors.getCaveMap(state),
@@ -23,28 +24,36 @@ const withKeyBindings = () => Target =>
         window.addEventListener("keypress", this.handleKeyPress, false);
       }
 
+      isValidMove = ([x, y]) => {
+        const { caveMap: c } = this.props;
+        return TILE_NAME_TO_PROPERTIES[c[y][x].name].passable;
+      };
+
       handleKeyPress = ({ key }) => {
         const {
-          caveMap: c,
           playerPosition: p,
           onUpdatePlayerPosition
         } = this.props;
 
         switch (key) {
           case "a": // left
-            p[0] > 0 && onUpdatePlayerPosition({ pos: [p[0] - 1, p[1]] });
+            var pos = [p[0] - 1, p[1]]
+            this.isValidMove(pos) && onUpdatePlayerPosition({ pos });
             break;
 
           case "w": // up
-            p[1] > 0 && onUpdatePlayerPosition({ pos: [p[0], p[1] - 1] });
+            var pos = [p[0], p[1] - 1];
+            this.isValidMove(pos) && onUpdatePlayerPosition({ pos });
             break;
 
           case "d": // right
-            p[0] < c.length - 1 && onUpdatePlayerPosition({ pos: [p[0] + 1, p[1]] });
+            var pos = [p[0] + 1, p[1]];
+            this.isValidMove(pos) && onUpdatePlayerPosition({ pos });
             break;
 
           case "s": // down
-            p[1] < c[0].length - 1 && onUpdatePlayerPosition({ pos: [p[0], p[1] + 1] });
+            var pos = [p[0], p[1] + 1];
+            this.isValidMove(pos) && onUpdatePlayerPosition({ pos });
             break;
 
           default:
