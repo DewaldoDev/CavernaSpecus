@@ -4,7 +4,8 @@ import { selectors } from "../../rootReducer";
 import { actions as playerActions } from "../../components/player/playerReducer";
 
 const mapStateToProps = state => ({
-  playerPosition: selectors.getPlayerPosition(state),
+  caveMap: selectors.getCaveMap(state),
+  playerPosition: selectors.getPlayerPosition(state)
 });
 
 const withKeyBindings = () => Target =>
@@ -13,6 +14,7 @@ const withKeyBindings = () => Target =>
   })(
     class extends Component {
       static propTypes = {
+        caveMap: PropTypes.arrayOf(PropTypes.array).isRequired,
         playerPosition: PropTypes.arrayOf(PropTypes.number).isRequired,
         onUpdatePlayerPosition: PropTypes.func.isRequired
       };
@@ -22,22 +24,27 @@ const withKeyBindings = () => Target =>
       }
 
       handleKeyPress = ({ key }) => {
-        const { playerPosition: p, onUpdatePlayerPosition } = this.props;
+        const {
+          caveMap: c,
+          playerPosition: p,
+          onUpdatePlayerPosition
+        } = this.props;
+
         switch (key) {
           case "a": // left
-            onUpdatePlayerPosition({ pos: [p[0] - 1, p[1]] });
+            p[0] > 0 && onUpdatePlayerPosition({ pos: [p[0] - 1, p[1]] });
             break;
 
           case "w": // up
-            onUpdatePlayerPosition({ pos: [p[0], p[1] - 1] });
+            p[1] > 0 && onUpdatePlayerPosition({ pos: [p[0], p[1] - 1] });
             break;
 
           case "d": // right
-            onUpdatePlayerPosition({ pos: [p[0] + 1, p[1]] });
+            p[0] < c.length - 1 && onUpdatePlayerPosition({ pos: [p[0] + 1, p[1]] });
             break;
 
           case "s": // down
-            onUpdatePlayerPosition({ pos: [p[0], p[1] + 1] });
+            p[1] < c[0].length - 1 && onUpdatePlayerPosition({ pos: [p[0], p[1] + 1] });
             break;
 
           default:
