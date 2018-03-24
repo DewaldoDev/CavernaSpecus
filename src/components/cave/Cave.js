@@ -12,23 +12,23 @@ const Container = styled.div`
   background-color: ${BACKGROUND_COLOUR};
 `;
 
-const SUBSET_SIZE = 30;
-
 export const getMapSubset = (map, p) => {
-  const MAX_LEFT_X = map[0].length - SUBSET_SIZE - 1;
-  const MAX_TOP_Y = map.length - SUBSET_SIZE - 1;
+  const SUBSET_WIDTH = 48;
+  const SUBSET_HEIGHT = 26;
+  const MAX_LEFT_X = map[0].length - SUBSET_WIDTH - 1;
+  const MAX_TOP_Y = map.length - SUBSET_HEIGHT - 1;
 
   const leftX =
-    getOffsetPosition(p[0] - (SUBSET_SIZE/2) - 1, 0, MAX_LEFT_X);
+    getOffsetPosition(p[0] - (SUBSET_WIDTH/2) - 1, 0, MAX_LEFT_X);
 
   const rightX =
-    getOffsetPosition(p[0] + (SUBSET_SIZE/2), SUBSET_SIZE + 1, map[0].length);
+    getOffsetPosition(p[0] + (SUBSET_WIDTH/2), SUBSET_WIDTH + 1, map[0].length);
 
   const topY =
-    getOffsetPosition(p[1] - (SUBSET_SIZE/2) - 1, 0, MAX_TOP_Y);
+    getOffsetPosition(p[1] - (SUBSET_HEIGHT/2) - 1, 0, MAX_TOP_Y);
 
   const bottomY =
-    getOffsetPosition(p[1] + (SUBSET_SIZE/2), SUBSET_SIZE + 1, map.length);
+    getOffsetPosition(p[1] + (SUBSET_HEIGHT/2), SUBSET_HEIGHT + 1, map.length);
 
   return ({
     leftX,

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TILE_NAME_TO_PROPERTIES } from "./config";
 
 const StyledTile = styled.span`
-  margin: 10px;
+  margin: 6px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ color }) => color};
 `;

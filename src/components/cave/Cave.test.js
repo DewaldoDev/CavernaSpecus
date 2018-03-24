@@ -5,15 +5,15 @@ const caveMap = new Array(60).fill(new Array(60).fill(null)).map((row, y) =>
 );
 
 describe("getMapSubset()", () => {
-  it("returns a 31 x 31 subset of the cave map", () => {
+  it("returns a 49 x 27 subset of the cave map", () => {
     const playerPosition = [30, 30];
 
     const { mapSubset } = getMapSubset(caveMap, playerPosition);
 
-    expect(mapSubset.length).toEqual(31);
-    expect(mapSubset[0].length).toEqual(31);
-    expect(mapSubset[0][0]).toEqual(caveMap[14][14]);
-    expect(mapSubset[30][30]).toEqual(caveMap[44][44])
+    expect(mapSubset.length).toEqual(27);
+    expect(mapSubset[0].length).toEqual(49);
+    expect(mapSubset[0][0]).toEqual(caveMap[16][5]);
+    expect(mapSubset[26][48]).toEqual(caveMap[42][53])
   });
 
   it("returns correct map subset when close to top left", () => {
@@ -21,10 +21,10 @@ describe("getMapSubset()", () => {
 
     const { mapSubset } = getMapSubset(caveMap, playerPosition);
 
-    expect(mapSubset.length).toEqual(31);
-    expect(mapSubset[0].length).toEqual(31);
+    expect(mapSubset.length).toEqual(27);
+    expect(mapSubset[0].length).toEqual(49);
     expect(mapSubset[0][0]).toEqual(caveMap[0][0]);
-    expect(mapSubset[30][30]).toEqual(caveMap[30][30]);
+    expect(mapSubset[26][48]).toEqual(caveMap[26][48]);
   });
 
   it("returns correct map subset when close to bottom right", () => {
@@ -32,10 +32,10 @@ describe("getMapSubset()", () => {
 
     const { mapSubset } = getMapSubset(caveMap, playerPosition);
 
-    expect(mapSubset.length).toEqual(31);
-    expect(mapSubset[0].length).toEqual(31);
-    expect(mapSubset[0][0]).toEqual(caveMap[29][29]);
-    expect(mapSubset[30][30]).toEqual(caveMap[59][59]);
+    expect(mapSubset.length).toEqual(27);
+    expect(mapSubset[0].length).toEqual(49);
+    expect(mapSubset[0][0]).toEqual(caveMap[33][11]);
+    expect(mapSubset[26][48]).toEqual(caveMap[59][59]);
   });
 
   it("updates map subset when player position changes", () => {
@@ -44,7 +44,7 @@ describe("getMapSubset()", () => {
     const secondPlayerPosition = [31, 30];
     const { mapSubset: secondMapSubset } = getMapSubset(caveMap, secondPlayerPosition);
 
-    expect(firstMapSubset[0][0]).toEqual(caveMap[14][14]);
-    expect(secondMapSubset[0][0]).toEqual(caveMap[14][15]);
+    expect(firstMapSubset[0][0]).toEqual(caveMap[16][5]);
+    expect(secondMapSubset[0][0]).toEqual(caveMap[16][6]);
   });
 });
