@@ -13,5 +13,10 @@ export const TILE_NAME_TO_PROPERTIES = {
     color: "#8d6e63",
     passable: false,
   },
+  PLAYER: {
+    glyph: "@",
+    backgroundColor: BACKGROUND_COLOUR,
+    color: "#fafafa",
+    passable: false,
+  },
 };
-
